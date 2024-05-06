@@ -19,12 +19,10 @@ function App() {
   useEffect(() => {
     if (!socket) return;
 
-    // Nasłuchuje na zdarzenie 'addTask' emitowane przez serwer
     socket.on('addTask', (newTask) => {
       setTasks((prevTasks) => [...prevTasks, newTask]);
     });
 
-    // Nasłuchuje na zdarzenie 'removeTask' emitowane przez serwer
     socket.on('removeTask', (taskId) => {
       setTasks((prevTasks) => prevTasks.filter((_, index) => index !== taskId));
     });
@@ -53,7 +51,7 @@ function App() {
 
   const removeTask = (taskId) => {
     setTasks((prevTasks) => prevTasks.filter((_, index) => index !== taskId));
-    socket.emit('removeTask', taskId); // Wysyła informację o usunięciu zadania do serwera
+    socket.emit('removeTask', taskId);
   };
 
   const handleInputChange = (event) => {
